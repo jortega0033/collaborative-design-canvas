@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Design Canvas</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="app-header">
+    <h1>Design Canvas</h1>
+    <p class="tagline">Layer-based scene editor</p>
+  </header>
+
+  <main class="workbench">
+    <section class="panel panel-projects" aria-labelledby="projects-heading">
+      <h2 id="projects-heading">Canvas</h2>
+      <div class="field">
+        <label for="doc-title">Document title</label>
+        <input id="doc-title" type="text" maxlength="80" autocomplete="off">
+      </div>
+      <div class="button-row">
+        <button type="button" id="new-canvas">New canvas</button>
+        <button type="button" id="load-fixture">Load fixture</button>
+      </div>
+      <button type="button" id="save" class="primary" disabled>Save</button>
+      <button type="button" id="reload-server" hidden>Reload server version</button>
+
+      <h3 id="project-list-heading">Project list</h3>
+      <ul id="project-list" class="project-list" aria-labelledby="project-list-heading"></ul>
+    </section>
+
+    <section class="panel panel-stage" aria-labelledby="stage-heading">
+      <h2 id="stage-heading">Stage</h2>
+      <p id="project-meta" class="meta">No canvas open.</p>
+      <div class="stage-frame">
+        <canvas id="preview" width="640" height="400" aria-label="Canvas preview of the layers in the open project. The layer list lists the same content as text.">Your browser does not support canvas. Use the layer list to review and edit layers.</canvas>
+      </div>
+      <div class="button-row">
+        <button type="button" id="add-rect" disabled>Add rectangle</button>
+        <button type="button" id="add-text" disabled>Add text</button>
+      </div>
+      <p id="status" class="status info" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="panel panel-inspector" aria-labelledby="layers-heading">
+      <h2 id="layers-heading">Layers</h2>
+      <ul id="layer-list" class="layer-list" aria-labelledby="layers-heading"></ul>
+      <div class="button-row">
+        <button type="button" id="layer-up" disabled>Move up</button>
+        <button type="button" id="layer-down" disabled>Move down</button>
+        <button type="button" id="layer-delete" class="danger" disabled>Delete layer</button>
+      </div>
+
+      <h3 id="inspector-heading">Inspector</h3>
+      <div class="inspector" role="group" aria-labelledby="inspector-heading">
+        <div class="field">
+          <label for="layer-label">Layer label</label>
+          <input id="layer-label" type="text" maxlength="60" autocomplete="off" disabled>
+        </div>
+        <div class="grid-2">
+          <div class="field">
+            <label for="layer-x">X</label>
+            <input id="layer-x" type="number" min="-2000" max="2000" step="1" disabled>
+          </div>
+          <div class="field">
+            <label for="layer-y">Y</label>
+            <input id="layer-y" type="number" min="-2000" max="2000" step="1" disabled>
+          </div>
+          <div class="field">
+            <label for="layer-w">Width</label>
+            <input id="layer-w" type="number" min="1" max="2000" step="1" disabled>
+          </div>
+          <div class="field">
+            <label for="layer-h">Height</label>
+            <input id="layer-h" type="number" min="1" max="2000" step="1" disabled>
+          </div>
+        </div>
+        <div class="field">
+          <label for="layer-fill">Fill</label>
+          <input id="layer-fill" type="color" value="#2f6f9f" disabled>
+        </div>
+        <div id="text-fields" hidden>
+          <div class="field">
+            <label for="layer-text">Text</label>
+            <textarea id="layer-text" rows="3" maxlength="500" disabled></textarea>
+          </div>
+          <div class="field">
+            <label for="layer-font">Font size</label>
+            <input id="layer-font" type="number" min="8" max="96" step="1" disabled>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
