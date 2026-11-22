@@ -92,7 +92,7 @@ Rules that every change must keep (the full table with tests is in [docs/archite
 
 - `main` is the default branch. CI runs on pull requests (see "Delivery workflow"). Checks are also run locally and reported with their output.
 - One branch per issue. The repository has no naming rule yet; `<issue-number>-<short-slug>` is the suggested form. Small commits with imperative subjects and a type prefix, as in the existing history (`feat:`, and by extension `fix:`, `docs:`, `test:`, `chore:`).
-- Order: local checks, then Code Reviewer and Reality Checker on the full diff and the recorded local output, then a draft pull request that names the issue (`Part of #1`, `Closes #n`), then CI, then `gh pr ready` only when CI is green. Do not merge your own pull request and do not push to `main`.
+- Order: local checks, then Code Reviewer and Reality Checker on the full diff and the recorded local output, then a draft pull request that names the issue (`Part of #1`, `Closes #n`), then CI, then `gh pr ready` only when CI is green (do not poll: end the turn with "Draft pull request #N is waiting for CI" and read `gh pr checks` once when woken). Do not merge your own pull request and do not push to `main`.
 - Never commit a data directory, a SQLite file, `.env*`, or `.prep/`.
 - Do not change `.claude/agents/`, `LOOP.md`, `loop-constraints.md` or `loop-budget.md` as part of a feature ticket.
 
@@ -109,6 +109,8 @@ Items 1 to 5 and 7 to 9 are recorded locally and given to both gates before the 
 7. `git status` showing no stray files, and confirmation that no dependency, external URL or non-loopback listener was added.
 8. Anything not verified, said plainly.
 9. The section "Agent roles run", as described under "Agent roles and ticket work".
+
+A step that needs a person (marked manual in the ticket) is done by the agent as far as it can, with the evidence, and the rest is listed under "Owner checks" in the pull request.
 
 ## Agent roles and ticket work
 
@@ -136,7 +138,7 @@ Delegate to the roles without waiting to be asked. Each role's `description` end
 
 How a ticket gets from the backlog to the owner. Each piece is described in its own file; this part only links them.
 
-- **Start and playbook.** The owner starts a run with `/next-ticket` ([skill](.claude/skills/next-ticket/SKILL.md)); that is the go signal for one ticket. The work follows [implement-ticket](.claude/skills/implement-ticket/SKILL.md). Ticket labels: `status:ready`, `status:blocked`, `status:in-progress`, `needs-decision`.
+- **Start and playbook.** The owner starts a run with `/next-ticket` ([skill](.claude/skills/next-ticket/SKILL.md)); that is the go signal for one leaf ticket (a `tracking` ticket or one with open sub-issues is never picked; the last sub-issue's pull request also closes the parent). The reviewers get the diff and evidence as files under `.claude/state/review/`. The work follows [implement-ticket](.claude/skills/implement-ticket/SKILL.md). Ticket labels: `status:ready`, `status:blocked`, `status:in-progress`, `needs-decision`.
 - **Review gate hook.** [`.claude/hooks/role_gate.py`](.claude/hooks/role_gate.py) blocks `gh pr create` and `gh pr ready` until Code Reviewer and Reality Checker ran after the last code edit, so the draft is opened only after both gates and the pull request is marked ready only after both gates ran again on the final code. `ROLE_GATE=off` in the environment Claude Code is started from switches it off for that session; only the owner does that.
 - **Permission rules.** [`.claude/settings.json`](.claude/settings.json): documented commands are allowed, merges, force pushes, pushes to `main` and releases are denied, edits to CI, agent configuration and Loop files ask first.
 - **CI.** [`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs the suite and the hook self-test on Linux and Windows. It runs on the draft pull request, and the pull request is marked ready only when it is green.
