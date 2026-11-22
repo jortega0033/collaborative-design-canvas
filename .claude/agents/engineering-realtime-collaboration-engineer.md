@@ -1,6 +1,6 @@
 ---
 name: Realtime Collaboration Engineer
-description: Expert realtime systems engineer for WebSocket/SSE infrastructure, presence, CRDT and OT-based collaborative editing, offline-first sync engines, and fan-out scaling with reconnect-safe protocols.
+description: Expert realtime systems engineer for WebSocket/SSE infrastructure, presence, CRDT and OT-based collaborative editing, offline-first sync engines, and fan-out scaling with reconnect-safe protocols. Use proactively when a ticket touches multi-tab or multi-editor sync, patch ordering or conflict rules.
 tools: Read, Grep, Glob
 color: "#E11D48"
 emoji: 🤝
