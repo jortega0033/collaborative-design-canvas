@@ -49,6 +49,8 @@ curl -s http://127.0.0.1:8750/api/v1/health
 
 Expected at the baseline: `{"status":"ok","api":1,"schema":1}`.
 
+The `curl` lines here and in the issues are written for Git Bash or `cmd.exe`. In Windows PowerShell 5.1 `curl` is an alias of `Invoke-WebRequest` and `\"` quoting inside `-d` breaks: use `curl.exe` there and pass a JSON body from a UTF-8 file with `--data-binary @file`. `>` in PowerShell 5.1 writes UTF-16, so let the program write the file itself.
+
 A single test: `python -m unittest tests.test_api.ConflictTest.test_concurrent_puts_same_base_revision`.
 
 ## Hard rules
