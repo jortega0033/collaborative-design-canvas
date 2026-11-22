@@ -13,7 +13,7 @@ A local, offline workbench for arranging rectangle and text layers on a fixed 64
 | Product scope, milestones, contracts, fixture, acceptance matrix | [docs/PRD.md](docs/PRD.md) |
 | How the code is built, the traced save workflow, the rules the code keeps, differences between the PRD and the code | [docs/architecture.md](docs/architecture.md) |
 | Launch, smoke steps, limits, baseline verification | [README.md](README.md) |
-| Backlog | Epic issue #1 and its sub-issues on GitHub. The epic lists them in dependency order with estimates and records the decisions shared by all tickets. |
+| Backlog | Epic issue #1 and its sub-issues on GitHub, in dependency order: #2, #7, #8, #3, #9, #4, #5, #6, #10. The epic lists them with estimates and records the decisions shared by all tickets. |
 | Loop setup and its limits | [LOOP.md](LOOP.md), [loop-constraints.md](loop-constraints.md) |
 | Project subagents and their origin | [.claude/agency-agents/README.md](.claude/agency-agents/README.md) |
 
