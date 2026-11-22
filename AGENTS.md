@@ -20,7 +20,7 @@ Both arguments are required. `--port 0` picks a free port and prints the address
 
 ## Ticket work
 
-To implement an issue, follow [.claude/skills/implement-ticket/SKILL.md](.claude/skills/implement-ticket/SKILL.md) and the section "Agent roles and ticket work" in [CLAUDE.md](CLAUDE.md). Each role file in `.claude/agents/` starts with a section "In this repository". An agent that cannot launch those roles as subagents does each step itself with that section as its checklist, and says so in the pull request.
+To implement an issue, follow [.claude/skills/implement-ticket/SKILL.md](.claude/skills/implement-ticket/SKILL.md) and the section "Agent roles and ticket work" in [CLAUDE.md](CLAUDE.md). Each Agency Agents role file in `.claude/agents/` (every file except `loop-verifier.md`) starts with a section "In this repository". An agent that cannot launch those roles as subagents does each step itself with that section as its checklist, and says so in the pull request. The author of a change does not count as its reviewer, so the two gates (Code Reviewer, then Reality Checker) then still need a separate reviewer: a different session or a person.
 
 ## Loop conventions
 

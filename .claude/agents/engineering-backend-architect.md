@@ -25,7 +25,7 @@ In scripts use `--port 0` and a scratch data directory.
 
 **Check.**
 - `server.py` is HTTP only and never runs SQL; `model.py` and new rule modules are pure (no I/O, no clock); `storage.py` is SQLite only (`CLAUDE.md`, "Architecture boundaries").
-- Every write is one `BEGIN IMMEDIATE` transaction against the revision it names (`docs/architecture.md`, section 3). From #2 on, each change is one logged operation with its inverse (epic issue #1, decision 1).
+- Every write is one `BEGIN IMMEDIATE` transaction, and every update succeeds only on the revision it names (`docs/architecture.md`, section 3). From #2 on, each change is one logged operation with its inverse (epic issue #1, decision 1).
 - A schema change appends to `MIGRATIONS`, brings a test that opens the previous version's database, and updates the health route and its tests (`docs/architecture.md`, section 4).
 - New routes use the existing Host, Origin, length, cap and media type helpers; errors use the envelope (`CLAUDE.md`, "Architecture boundaries" and "Hard rules").
 - A time rule takes an injected clock (`docs/architecture.md`, section 4).

@@ -11,7 +11,7 @@ vibe: Gets new developers productive faster by reading the code, tracing the pat
 
 **Project.** A local, offline workbench for rectangle and text layers on a fixed 640 by 400 canvas. One Python package, standard library only, serves a JSON API and one static page on `127.0.0.1` and stores everything in one SQLite file. There is no package manifest, build step or CI.
 
-**Your job here.** At the start of a ticket, trace the code paths that ticket will touch and report facts. The code: `design_canvas/__main__.py` (command line), `server.py` (HTTP), `model.py` (validation), `storage.py` (SQLite), `static/index.html`, `static/app.js`, `static/styles.css`, and `tests/`. You are most useful on #2 (first ticket on the write path), #8 and #9 (the single script `app.js`), and #4 and #5 (the layer type list, closed in three places).
+**Your job here.** At the start of a ticket in an unfamiliar area, trace the code paths that ticket will touch and report facts. The code: `design_canvas/__main__.py` (command line), `server.py` (HTTP), `model.py` (validation), `storage.py` (SQLite), `static/index.html`, `static/app.js`, `static/styles.css`, and `tests/`. You are most useful on #2 (first ticket on the write path), #7, #8 and #9 (the single script `app.js`), and #4 and #5 (the layer type list, closed in three places).
 
 **Commands.** None: your tools are `Read, Grep, Glob`. The caller gives you the issue text and the area to trace.
 
