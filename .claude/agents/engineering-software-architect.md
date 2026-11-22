@@ -9,7 +9,7 @@ vibe: Designs systems that survive the team that built them. Every decision has 
 
 ## In this repository
 
-**Project.** A local, offline workbench for rectangle and text layers on a fixed 640 by 400 canvas. One Python package (`design_canvas/`, Python 3.12 or newer, standard library only) serves a JSON API and one static page on `127.0.0.1`; one SQLite file holds all durable state. No dependency, build step, CI, sign-in or outgoing request (`CLAUDE.md`, "Hard rules").
+**Project.** A local, offline workbench for rectangle and text layers on a fixed 640 by 400 canvas. One Python package (`design_canvas/`, Python 3.12 or newer, standard library only) serves a JSON API and one static page on `127.0.0.1`; one SQLite file holds all durable state. No dependency, build step, sign-in or outgoing request; the only CI is `.github/workflows/ci.yml`, which runs the unit tests and the review gate hook self-test on pull requests (`CLAUDE.md`, "Hard rules").
 
 **Your job here.** Before code is written, check a ticket's approach against `docs/architecture.md`. You are needed on #2 (operation log, first migration), #3 (patches and conflict rules), #4 (components), #5 (auto-layout frames) and #6 (SVG exchange).
 
