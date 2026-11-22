@@ -92,20 +92,20 @@ Rules that every change must keep (the full table with tests is in [docs/archite
 
 - `main` is the default branch. CI runs on pull requests (see "Delivery workflow"). Checks are also run locally and reported with their output.
 - One branch per issue. The repository has no naming rule yet; `<issue-number>-<short-slug>` is the suggested form. Small commits with imperative subjects and a type prefix, as in the existing history (`feat:`, and by extension `fix:`, `docs:`, `test:`, `chore:`).
-- Open a draft pull request that names the issue (`Part of #1`, `Closes #n`). Do not merge your own pull request and do not push to `main`.
+- Order: local checks, then Code Reviewer and Reality Checker on the full diff and the recorded local output, then a draft pull request that names the issue (`Part of #1`, `Closes #n`), then CI, then `gh pr ready` only when CI is green. Do not merge your own pull request and do not push to `main`.
 - Never commit a data directory, a SQLite file, `.env*`, or `.prep/`.
 - Do not change `.claude/agents/`, `LOOP.md`, `loop-constraints.md` or `loop-budget.md` as part of a feature ticket.
 
 ## Evidence before a ticket is called done
 
-Put these in the pull request description. Paste real output; do not summarise a run you did not make.
+Items 1 to 5 and 7 to 9 are recorded locally and given to both gates before the draft pull request is opened; put them in the pull request description. Item 6 comes after the draft is open: CI runs on it, and the pull request is marked ready only when CI is green. Paste real output; do not summarise a run you did not make.
 
 1. The full output tail of `python -m unittest discover -s tests -t .` from a clean checkout, with the Python version and the operating system. State the test count before and after the change (68 at the baseline). Name every baseline test whose expectation was changed on purpose.
 2. For each acceptance criterion of the issue: the name of the test that proves it, or the exact manual step and what was observed.
 3. For a schema change: the test that opens a database created by the previous schema version, the new `user_version`, and the health response.
 4. For a new or changed route: one request and response pair per success and per error code, taken from a server started with `--port 0` on a scratch data directory, and the PRD section 6 diff.
 5. For a change under `design_canvas/static/`: a browser run on `http://127.0.0.1:<port>/` with the browser name and version, the viewport sizes checked (800x600 and one width below 560 px), keyboard-only operation of the changed controls, and the console free of errors and of blocked or external requests. Browser checks are manual: the repository has no approved browser automation (PRD section 13).
-6. CI green on the pull request, with the link to the run.
+6. CI green on the draft pull request, with the link to the run. This is a condition for marking the pull request ready, checked by the driver; Reality Checker does not judge it.
 7. `git status` showing no stray files, and confirmation that no dependency, external URL or non-loopback listener was added.
 8. Anything not verified, said plainly.
 9. The section "Agent roles run", as described under "Agent roles and ticket work".
@@ -127,7 +127,7 @@ Delegate to the roles without waiting to be asked. Each role's `description` end
 | After coding | Application Security Engineer, Accessibility Auditor, API Tester | the change touches untrusted input or request guards, the page, or a route or contract |
 | Gate on every ticket | Code Reviewer, then Reality Checker | always: the review gate on the full diff, then the acceptance gate on the acceptance criteria and the evidence |
 
-- Both gates run on every ticket, however small. A ticket is not done until both pass.
+- Both gates run on every ticket, however small, after the local checks pass and before the draft pull request is opened. A ticket is not done until both pass and CI on the draft pull request is green.
 - Backend Architect, Frontend Developer and API Tester can edit files and run commands. Every other role, `loop-verifier` included, is limited to `Read, Grep, Glob`: give it the diff, the acceptance criteria and the recorded command output.
 - The session or role that wrote a change does not count as its reviewer.
 - List each role that ran, what it was asked and its verdict in the pull request description under "Agent roles run".
@@ -137,9 +137,9 @@ Delegate to the roles without waiting to be asked. Each role's `description` end
 How a ticket gets from the backlog to the owner. Each piece is described in its own file; this part only links them.
 
 - **Start and playbook.** The owner starts a run with `/next-ticket` ([skill](.claude/skills/next-ticket/SKILL.md)); that is the go signal for one ticket. The work follows [implement-ticket](.claude/skills/implement-ticket/SKILL.md). Ticket labels: `status:ready`, `status:blocked`, `status:in-progress`, `needs-decision`.
-- **Review gate hook.** [`.claude/hooks/role_gate.py`](.claude/hooks/role_gate.py) blocks `gh pr create` and `gh pr ready` until Code Reviewer and Reality Checker ran after the last code edit. `ROLE_GATE=off` in the environment Claude Code is started from switches it off for that session; only the owner does that.
+- **Review gate hook.** [`.claude/hooks/role_gate.py`](.claude/hooks/role_gate.py) blocks `gh pr create` and `gh pr ready` until Code Reviewer and Reality Checker ran after the last code edit, so the draft is opened only after both gates and the pull request is marked ready only after both gates ran again on the final code. `ROLE_GATE=off` in the environment Claude Code is started from switches it off for that session; only the owner does that.
 - **Permission rules.** [`.claude/settings.json`](.claude/settings.json): documented commands are allowed, merges, force pushes, pushes to `main` and releases are denied, edits to CI, agent configuration and Loop files ask first.
-- **CI.** [`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs the suite and the hook self-test on Linux and Windows. It must be green before a pull request is marked ready.
+- **CI.** [`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs the suite and the hook self-test on Linux and Windows. It runs on the draft pull request, and the pull request is marked ready only when it is green.
 - **Pull request.** Use the [template](.github/pull_request_template.md). Add one line to [CHANGELOG.md](CHANGELOG.md) under Unreleased.
 - **UI and copy.** [docs/ui-quality.md](docs/ui-quality.md) holds the ten UI rules; UI tickets start with the `ui-ux-pro-max` skill and copy goes through `unslop` before the pull request.
 - **Owner only.** Merging and releasing ([docs/RELEASING.md](docs/RELEASING.md)). Decisions behind all of this: [docs/owner-decisions.md](docs/owner-decisions.md). Security reports: [SECURITY.md](SECURITY.md).
