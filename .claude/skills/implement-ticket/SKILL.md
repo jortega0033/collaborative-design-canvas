@@ -12,7 +12,7 @@ The project subagents in `.claude/agents/` are part of the work. Delegate to the
 
 ## Steps
 
-1. **Read the ticket.** Work only on a leaf ticket: one labelled `tracking`, or with open sub-issues, is a container, so take its first open sub-issue instead; the pull request of a parent's last open sub-issue also says `Closes #<parent>`. Do not change agent configuration (`.claude/agents`, `skills`, `hooks`, `settings.json`) in a ticket, by any tool. `gh issue view <number>` and the epic it belongs to. Check that every prerequisite issue is closed and that no owner decision named in the ticket is still open. If the ticket is blocked, stop and say what blocks it.
+1. **Read the ticket.** Work only on a leaf ticket: one labelled `tracking`, or with open sub-issues, is a container: stop and list its open sub-issues, and work only on a leaf that is `status:ready`; the pull request of a parent's last open sub-issue also says `Closes #<parent>`. Do not change agent configuration (`.claude/agents`, `skills`, `hooks`, `settings.json`) in a ticket, by any tool. `gh issue view <number>` and the epic it belongs to. Check that every prerequisite issue is closed and that no owner decision named in the ticket is still open. If the ticket is blocked, stop and say what blocks it.
 2. **Read the rules.** `CLAUDE.md`, then the architecture notes it links to. For a ticket that changes the page, run the `ui-ux-pro-max` skill now (design-system search for the product type) and read `docs/ui-quality.md`.
 3. **Orient and check the approach.** Delegate as the table "Before coding" says. Settle open design questions before writing code.
 4. **Branch** as the Git workflow in `CLAUDE.md` says. Never work on the default branch.
