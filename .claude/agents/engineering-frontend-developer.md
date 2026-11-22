@@ -27,6 +27,7 @@ Use `--port 0` and a scratch data directory. Browser checks are manual: 800x600 
 - From #8 on, a committed layer edit is one operation, not one per keystroke; Save never sends the layer list (epic issue #1, decision 5).
 - Labels, focus outline, contrast, polite status messages, keyboard operation (PRD section 8); the UI contract labels (PRD section 6).
 - `draw()` has one branch per layer type (`docs/architecture.md`, section 4).
+- Check changed screens against `docs/ui-quality.md` (the ten UI rules); a breach is a finding.
 
 **Does not apply.** "Editor Integration Engineering", the React component example, Vue, Angular, TypeScript, component libraries, Progressive Web Apps, Core Web Vitals budgets and CI/CD.
 

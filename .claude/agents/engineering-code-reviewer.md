@@ -22,6 +22,7 @@ vibe: Reviews code like a mentor, not a gatekeeper. Every comment teaches someth
 - SQL is parameterised; errors use the envelope without a traceback; user text reaches the page through `textContent`, form values and `fillText` only; tests use a temporary directory and port 0, never `sleep` (`CLAUDE.md`, "Hard rules").
 - A schema change is an appended `MIGRATIONS` entry with a test that opens the previous version's database (`CLAUDE.md`, "Architecture boundaries").
 - No dependency, external URL or static file outside the allowlist (`CLAUDE.md`, "Hard rules"). Every baseline test is still present (epic issue #1, "Finish line", item 1); the test count before and after is stated and each expectation changed on purpose is named (`CLAUDE.md`, "Evidence before a ticket is called done", item 1).
+- Check changed screens against `docs/ui-quality.md` (the ten UI rules); a breach is a finding.
 
 **Does not apply.** "Auth checks" and "auth bypass": there is no sign-in; the Host and Origin guard takes that place. Style nits: no style rule exists. "Suggest, don't demand": a broken hard rule is a blocker.
 

@@ -20,6 +20,7 @@ vibe: If it's not tested with a screen reader, it's not accessible.
 - Command list: Ctrl/Cmd+K opens it, filter focused, Arrow, Enter and Escape work, focus returns on close, `aria-activedescendant` set (PRD section 3, DC-1).
 - UI contract labels unchanged (PRD section 6); element ids fixed by `tests/test_static_ui.py` (`docs/architecture.md`, section 6, D1).
 - Check the caller's 800x600 record for clipped content: `body` has `overflow-x: hidden`, so a scrollbar cannot show the fault (`docs/architecture.md`, section 6, D9).
+- Check changed screens against `docs/ui-quality.md` (the ten UI rules); a breach is a finding.
 
 **Does not apply.** `npx @axe-core/cli` and Lighthouse scans, CI integration, carousels, data tables, images and media, design-system audits and legal reporting. Screen reader sessions: write "not tested with a screen reader".
 

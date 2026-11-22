@@ -16,6 +16,7 @@ A local, offline workbench for arranging rectangle and text layers on a fixed 64
 | Backlog | Epic issue #1 and its sub-issues on GitHub, in dependency order: #2, #7, #8, #3, #9, #4, #5, #6, #10. The epic lists them with estimates and records the decisions shared by all tickets. |
 | Loop setup and its limits | [LOOP.md](LOOP.md), [loop-constraints.md](loop-constraints.md) |
 | Ticket playbook and the agent roles it runs | [.claude/skills/implement-ticket/SKILL.md](.claude/skills/implement-ticket/SKILL.md) and the section "Agent roles and ticket work" below |
+| Delivery tooling, UI rules, owner decisions | [docs/ui-quality.md](docs/ui-quality.md), [docs/owner-decisions.md](docs/owner-decisions.md), section "Delivery workflow" below |
 | Origin, licence and local changes of the role files | [.claude/agency-agents/README.md](.claude/agency-agents/README.md) |
 
 When the PRD and the code disagree, the code is the baseline and [docs/architecture.md](docs/architecture.md) records the difference. A ticket that changes a contract updates PRD section 6 in the same pull request.
@@ -89,7 +90,7 @@ Rules that every change must keep (the full table with tests is in [docs/archite
 
 ## Git workflow
 
-- `main` is the default branch and is not protected. There is no CI. Checks are run locally and reported with their output.
+- `main` is the default branch. CI runs on pull requests (see "Delivery workflow"). Checks are also run locally and reported with their output.
 - One branch per issue. The repository has no naming rule yet; `<issue-number>-<short-slug>` is the suggested form. Small commits with imperative subjects and a type prefix, as in the existing history (`feat:`, and by extension `fix:`, `docs:`, `test:`, `chore:`).
 - Open a draft pull request that names the issue (`Part of #1`, `Closes #n`). Do not merge your own pull request and do not push to `main`.
 - Never commit a data directory, a SQLite file, `.env*`, or `.prep/`.
@@ -104,9 +105,10 @@ Put these in the pull request description. Paste real output; do not summarise a
 3. For a schema change: the test that opens a database created by the previous schema version, the new `user_version`, and the health response.
 4. For a new or changed route: one request and response pair per success and per error code, taken from a server started with `--port 0` on a scratch data directory, and the PRD section 6 diff.
 5. For a change under `design_canvas/static/`: a browser run on `http://127.0.0.1:<port>/` with the browser name and version, the viewport sizes checked (800x600 and one width below 560 px), keyboard-only operation of the changed controls, and the console free of errors and of blocked or external requests. Browser checks are manual: the repository has no approved browser automation (PRD section 13).
-6. `git status` showing no stray files, and confirmation that no dependency, external URL or non-loopback listener was added.
-7. Anything not verified, said plainly.
-8. The section "Agent roles run", as described under "Agent roles and ticket work".
+6. CI green on the pull request, with the link to the run.
+7. `git status` showing no stray files, and confirmation that no dependency, external URL or non-loopback listener was added.
+8. Anything not verified, said plainly.
+9. The section "Agent roles run", as described under "Agent roles and ticket work".
 
 ## Agent roles and ticket work
 
@@ -129,6 +131,18 @@ Delegate to the roles without waiting to be asked. Each role's `description` end
 - Backend Architect, Frontend Developer and API Tester can edit files and run commands. Every other role, `loop-verifier` included, is limited to `Read, Grep, Glob`: give it the diff, the acceptance criteria and the recorded command output.
 - The session or role that wrote a change does not count as its reviewer.
 - List each role that ran, what it was asked and its verdict in the pull request description under "Agent roles run".
+
+## Delivery workflow
+
+How a ticket gets from the backlog to the owner. Each piece is described in its own file; this part only links them.
+
+- **Start and playbook.** The owner starts a run with `/next-ticket` ([skill](.claude/skills/next-ticket/SKILL.md)); that is the go signal for one ticket. The work follows [implement-ticket](.claude/skills/implement-ticket/SKILL.md). Ticket labels: `status:ready`, `status:blocked`, `status:in-progress`, `needs-decision`.
+- **Review gate hook.** [`.claude/hooks/role_gate.py`](.claude/hooks/role_gate.py) blocks `gh pr create` and `gh pr ready` until Code Reviewer and Reality Checker ran after the last code edit. `ROLE_GATE=off` in the environment Claude Code is started from switches it off for that session; only the owner does that.
+- **Permission rules.** [`.claude/settings.json`](.claude/settings.json): documented commands are allowed, merges, force pushes, pushes to `main` and releases are denied, edits to CI, agent configuration and Loop files ask first.
+- **CI.** [`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs the suite and the hook self-test on Linux and Windows. It must be green before a pull request is marked ready.
+- **Pull request.** Use the [template](.github/pull_request_template.md). Add one line to [CHANGELOG.md](CHANGELOG.md) under Unreleased.
+- **UI and copy.** [docs/ui-quality.md](docs/ui-quality.md) holds the ten UI rules; UI tickets start with the `ui-ux-pro-max` skill and copy goes through `unslop` before the pull request.
+- **Owner only.** Merging and releasing ([docs/RELEASING.md](docs/RELEASING.md)). Decisions behind all of this: [docs/owner-decisions.md](docs/owner-decisions.md). Security reports: [SECURITY.md](SECURITY.md).
 
 ## Loop
 

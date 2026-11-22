@@ -98,3 +98,7 @@ claude -p "List every project subagent defined in .claude/agents with its exact 
 ```
 
 The answer listed all twelve files in `.claude/agents/` with their `name:` values. It gave `Read, Grep, Glob` for the eight reviewer roles and `loop-verifier`, and no `tools:` line (all tools inherited) for Backend Architect, Frontend Developer and API Tester. It reported the "In this repository" section at the start of the eleven Agency Agents roles and not in `loop-verifier`, and the skill `implement-ticket` as available in the session's skill list. Not shown by this run: a launched subagent quoting its section, and behaviour in an interactive session.
+
+## Local change: SDLC kit (2026-11-22)
+
+This pass added, without changing any runtime code or product test: the review gate hook (`.claude/hooks/role_gate.py`) and `.claude/settings.json`; `.github/` (CI workflow, pull request template, CODEOWNERS, ticket template, Dependabot); `SECURITY.md`, `CHANGELOG.md` and `docs/RELEASING.md`; the `next-ticket` skill; the `ui-ux-pro-max` and `unslop` skills; `docs/ui-quality.md` and `docs/owner-decisions.md`. In the role files it added one checklist line naming `docs/ui-quality.md` to Code Reviewer, Frontend Developer and Accessibility Auditor (UI Designer and UX Architect are not installed here). No other text of the role files changed.
