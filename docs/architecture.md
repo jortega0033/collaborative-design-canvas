@@ -122,6 +122,8 @@ Numbered so that issues can cite them. "Batch decision" means the epic (issue #1
 | D14 | "Unique ignoring case" is `str.lower()` (`storage.py:67-68`), not Unicode case folding. | `Straße` and `STRASSE` are different titles. Matters for the `title_taken` rule of the SVG import. | Noted in issue #6; no change planned |
 | D15 | The epic's acceptance text says the fixture "exports byte-identically". Export does not exist until DC-5. | The epic finish line has to say which ticket supplies each check. | Epic (issue #1) |
 | D16 | PRD section 5 names Python 3.12. Preparation ran 3.13.14 only. | 3.12 behaviour is the owner's record (README), not reproduced. Needs verification. | Release check ticket |
+| D17 | PRD section 10 caps every request body at 262144 bytes and the server answers 413 before reading it (`server.py:164-166`). DC-5 and issue #6 want an SVG file over 262144 bytes (the example is 300000 bytes) answered with 422 and a specific code. | As written, the oversized file never reaches the import code. | Batch decision: the two SVG routes read up to 1048576 bytes and answer 422 `svg_too_large` when the SVG text is over 262144 bytes; a body over 1048576 bytes is still 413. Issue #6 updates PRD section 10 |
+| D18 | DC-2 keeps each tab's `client_id` in `sessionStorage`. Browsers copy `sessionStorage` when a tab is duplicated, so two tabs can start with the same id. Neither the PRD nor issue #3 mentions it. | Two tabs with one id would have their edits treated as duplicates of each other. | The two-tab page ticket detects it and gives the copy a new id |
 
 ## 7. Decisions still with the owner
 
