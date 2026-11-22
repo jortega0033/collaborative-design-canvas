@@ -27,6 +27,6 @@ Entry 11 of the owner's list (Rust is verified in CI only) does not apply: this 
 | #1 (decision 10) | Whether components nest | They do not nest |
 | #1 (decision 10) | SVG import and transforms | Import rejects transforms |
 | #1 (decision 10) | Pointer drag on the canvas | Not in this batch |
-| #10 | Whether to add browser automation or CI in the release check | Neither is added by the ticket; the ticket states no default, so the conservative option applies (flag in issue). CI itself is installed by the tooling pass (entry 8). |
+| #10 | Whether to add browser automation or CI in the release check | Neither is added by the ticket; the ticket settles it with its out-of-scope line ("either would be its own decision by the owner"), so no fallback is needed. CI itself is installed by the tooling pass (entry 8). |
 
 No other open owner decision with a missing default was found in the epic's children (#2 to #10) on 2026-11-22.

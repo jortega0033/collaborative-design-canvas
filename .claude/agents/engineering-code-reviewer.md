@@ -9,7 +9,7 @@ vibe: Reviews code like a mentor, not a gatekeeper. Every comment teaches someth
 
 ## In this repository
 
-**Project.** A local, offline workbench for rectangle and text layers on a fixed 640 by 400 canvas: Python standard library only, native JavaScript, one SQLite file, bound to `127.0.0.1`. There is no linter and no CI.
+**Project.** A local, offline workbench for rectangle and text layers on a fixed 640 by 400 canvas: Python standard library only, native JavaScript, one SQLite file, bound to `127.0.0.1`. There is no linter. `.github/workflows/ci.yml` runs the suite and the hook self-test on ubuntu and windows with Python 3.12 and 3.13.
 
 **Your job here.** You are the review gate on every ticket, whatever its size. Review the full diff against `main` across `design_canvas/*.py`, `design_canvas/static/`, `tests/` and, when a contract changed, `docs/PRD.md` section 6.
 

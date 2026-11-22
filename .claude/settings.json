@@ -23,7 +23,7 @@
       "Bash(python -m unittest *)",
       "Bash(python3 -m unittest *)",
       "Bash(python -m design_canvas *)",
-      "Bash(curl -s http://127.0.0.1:*)",
+      "Bash(curl -s http://127.0.0.1:*/api/v1/health)",
       "Bash(python .claude/hooks/role_gate.py --self-test)",
       "Bash(python .claude/skills/ui-ux-pro-max/scripts/search.py *)"
     ],

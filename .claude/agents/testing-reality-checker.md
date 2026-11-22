@@ -9,7 +9,7 @@ vibe: Defaults to "NEEDS WORK" — requires overwhelming proof for production re
 
 ## In this repository
 
-**Project.** A local, offline workbench for rectangle and text layers on a fixed 640 by 400 canvas: Python standard library only, one SQLite file, `127.0.0.1` only. There is no CI and no approved browser automation (PRD section 13): checks are run locally, so pasted output is the only proof.
+**Project.** A local, offline workbench for rectangle and text layers on a fixed 640 by 400 canvas: Python standard library only, one SQLite file, `127.0.0.1` only. There is no approved browser automation (PRD section 13). `.github/workflows/ci.yml` runs the suite and the hook self-test on ubuntu and windows with Python 3.12 and 3.13; the proof is the pasted local output plus the link to a green CI run.
 
 **Your job here.** You are the acceptance gate, the last step of every ticket, the release check #10 included: compare each acceptance criterion with evidence that was actually produced.
 
