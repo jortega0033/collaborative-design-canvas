@@ -15,7 +15,8 @@ A local, offline workbench for arranging rectangle and text layers on a fixed 64
 | Launch, smoke steps, limits, baseline verification | [README.md](README.md) |
 | Backlog | Epic issue #1 and its sub-issues on GitHub, in dependency order: #2, #7, #8, #3, #9, #4, #5, #6, #10. The epic lists them with estimates and records the decisions shared by all tickets. |
 | Loop setup and its limits | [LOOP.md](LOOP.md), [loop-constraints.md](loop-constraints.md) |
-| Project subagents and their origin | [.claude/agency-agents/README.md](.claude/agency-agents/README.md) |
+| Ticket playbook and the agent roles it runs | [.claude/skills/implement-ticket/SKILL.md](.claude/skills/implement-ticket/SKILL.md) and the section "Agent roles and ticket work" below |
+| Origin, licence and local changes of the role files | [.claude/agency-agents/README.md](.claude/agency-agents/README.md) |
 
 When the PRD and the code disagree, the code is the baseline and [docs/architecture.md](docs/architecture.md) records the difference. A ticket that changes a contract updates PRD section 6 in the same pull request.
 
@@ -105,26 +106,30 @@ Put these in the pull request description. Paste real output; do not summarise a
 5. For a change under `design_canvas/static/`: a browser run on `http://127.0.0.1:<port>/` with the browser name and version, the viewport sizes checked (800x600 and one width below 560 px), keyboard-only operation of the changed controls, and the console free of errors and of blocked or external requests. Browser checks are manual: the repository has no approved browser automation (PRD section 13).
 6. `git status` showing no stray files, and confirmation that no dependency, external URL or non-loopback listener was added.
 7. Anything not verified, said plainly.
+8. The section "Agent roles run", as described under "Agent roles and ticket work".
 
-## Subagents
+## Agent roles and ticket work
 
-Project-local roles are in `.claude/agents/`. Reviewer roles (Software Architect, Code Reviewer, Codebase Onboarding Engineer, Database Optimizer, Realtime Collaboration Engineer, Application Security Engineer, Accessibility Auditor, Reality Checker, `loop-verifier`) are limited to `Read, Grep, Glob`. Implementing roles (Backend Architect, Frontend Developer, API Tester) are written for larger stacks; the hard rules above override anything in their text. See [.claude/agency-agents/README.md](.claude/agency-agents/README.md) for sources, licence and the name collision with a user-level install.
+When asked to implement, continue or finish a GitHub issue, follow the playbook [`.claude/skills/implement-ticket/SKILL.md`](.claude/skills/implement-ticket/SKILL.md). Claude Code loads it on its own for ticket work; `/implement-ticket <issue number>` starts it by hand.
+
+The roles are project-local subagents in `.claude/agents/`. Every role file except `loop-verifier.md` starts with a section "In this repository", written for this project: the constraints that bind the role, the files it owns or reviews, the commands it runs or the evidence it must be given, its checklist, and what it hands back. The text below that section is generic upstream text written for larger stacks; the section and this file override it. Sources, licence, local changes and the name collision with a user-level install are in [.claude/agency-agents/README.md](.claude/agency-agents/README.md).
+
+Delegate to the roles without waiting to be asked. Each role's `description` ends with a "Use proactively ..." sentence, which is what makes Claude Code do so.
+
+| When | Role | Runs when |
+|---|---|---|
+| Before coding | Codebase Onboarding Engineer | the ticket is in an unfamiliar area |
+| Before coding | Software Architect | the ticket adds or changes a module boundary, data model, schema, API or dependency |
+| While coding | Backend Architect, Frontend Developer | implementing server-side files, or files under `design_canvas/static/` |
+| While coding | Database Optimizer, Realtime Collaboration Engineer | reviewing SQL and schema changes, or two-tab sync, patch order and conflict rules |
+| After coding | Application Security Engineer, Accessibility Auditor, API Tester | the change touches untrusted input or request guards, the page, or a route or contract |
+| Gate on every ticket | Code Reviewer, then Reality Checker | always: the review gate on the full diff, then the acceptance gate on the acceptance criteria and the evidence |
+
+- Both gates run on every ticket, however small. A ticket is not done until both pass.
+- Backend Architect, Frontend Developer and API Tester can edit files and run commands. Every other role, `loop-verifier` included, is limited to `Read, Grep, Glob`: give it the diff, the acceptance criteria and the recorded command output.
+- The session or role that wrote a change does not count as its reviewer.
+- List each role that ran, what it was asked and its verdict in the pull request description under "Agent roles run".
 
 ## Loop
 
 Issue triage runs at L1: report-only, started by hand, no scheduler, no GitHub writes. See [LOOP.md](LOOP.md).
-
-## Ticket implementation: agent roles run automatically
-
-When asked to implement, continue or finish a GitHub issue, follow the playbook in [`.claude/skills/implement-ticket/SKILL.md`](.claude/skills/implement-ticket/SKILL.md). Claude Code loads it on its own for ticket work; `/implement-ticket <issue number>` starts it by hand.
-
-Delegate to the project subagents in `.claude/agents/` without waiting to be asked:
-
-- **Before coding:** Codebase Onboarding Engineer and Software Architect, as their descriptions say.
-- **While coding:** the implementing role that matches the files being changed.
-- **After coding:** each specialist reviewer whose trigger matches the change.
-- **On every ticket, before it is called done:** Code Reviewer, then Reality Checker.
-- The session that wrote a change does not count as its reviewer.
-- List the roles that ran and their verdicts in the pull request description under "Agent roles run".
-
-Each role's `description` ends with a "Use proactively ..." sentence, which is what makes Claude Code delegate to it without being told.

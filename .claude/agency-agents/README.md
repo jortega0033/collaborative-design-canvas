@@ -79,8 +79,22 @@ Fetch the same paths at a newer revision, re-apply the `tools:` line to the eigh
 
 ## Local change: automatic delegation (2026-11-22)
 
-One sentence beginning "Use proactively" was appended to the `description:` line of every Agency Agents role in `.claude/agents/` (not to `loop-verifier`). Claude Code uses that field to decide when to delegate, so the roles now run during ticket work without being named. Nothing else in the role files changed.
+One sentence beginning "Use proactively" was appended to the `description:` line of every Agency Agents role in `.claude/agents/` (not to `loop-verifier`). Claude Code uses that field to decide when to delegate, so the roles now run during ticket work without being named. Nothing else in the role files changed at that step.
 
-This supersedes any statement above that a role file is unmodified or that the `tools:` line is the only local change. To compare a role with the pinned upstream file, remove that sentence (and the `tools:` line where one was added) first.
+This supersedes any statement above that a role file is unmodified or that the `tools:` line is the only local change. To compare a role with the pinned upstream file, remove that sentence (and the `tools:` line where one was added) first, and also the section described next.
+
+A section headed "In this repository" was then inserted directly after the frontmatter of every Agency Agents role (not `loop-verifier`), before the upstream text, so that it is the first thing the subagent reads. It is project-specific text written for this repository, not upstream text, and the upstream hashes above do not cover it. It states the stack and the hard rules that bind the role, the files the role owns or reviews, the commands it runs or the evidence it must be given, a checklist that cites `CLAUDE.md`, `docs/architecture.md`, `docs/PRD.md` and the epic, the parts of the upstream text that do not apply here, and what the role hands back. The frontmatter and the upstream text below the section were not changed.
+
+Comparing a role with the pinned upstream file therefore requires removing that section as well: delete from the heading `## In this repository` up to and including the line "This section and CLAUDE.md override the generic text below wherever they differ.", and one of the two blank lines around the section. With the section, the "Use proactively" sentence (and the full stop added before it in the four descriptions that had none upstream: Reality Checker, Backend Architect, Frontend Developer, API Tester) and the added `tools:` line removed, each of the eleven files matched its upstream SHA-256 in the table above (checked 2026-11-22).
+
+When a role is updated from upstream (see "Updating"), re-insert its section and check it against the current `CLAUDE.md` and architecture notes.
 
 The steps at which each role runs are in `.claude/skills/implement-ticket/SKILL.md`.
+
+Verification, 2026-11-22: after the sections were inserted, this was run once from the repository root with Claude Code 2.1.323, headless:
+
+```text
+claude -p "List every project subagent defined in .claude/agents with its exact name and tools, say for each whether its instructions begin with a section titled In this repository, and say whether a skill named implement-ticket is available. Plain list, no commentary." --model haiku
+```
+
+The answer listed all twelve files in `.claude/agents/` with their `name:` values. It gave `Read, Grep, Glob` for the eight reviewer roles and `loop-verifier`, and no `tools:` line (all tools inherited) for Backend Architect, Frontend Developer and API Tester. It reported the "In this repository" section at the start of the eleven Agency Agents roles and not in `loop-verifier`, and the skill `implement-ticket` as available in the session's skill list. Not shown by this run: a launched subagent quoting its section, and behaviour in an interactive session.
