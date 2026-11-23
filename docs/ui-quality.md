@@ -23,3 +23,4 @@ Binding for every change to `design_canvas/static/` and to user-facing copy. The
 - Enforcement is by the review gate: Code Reviewer reads every diff against this file. Rule 1 can be linted with a search for `border-left` and `border-right` with a width of 3 px or more; rule 2 cannot be detected reliably from CSS and needs a reader.
 - The Frontend Developer, Accessibility Auditor and Code Reviewer roles name this file in their checklists.
 - Existing screens that break a rule are listed in a ticket, not fixed as a side effect of another ticket.
+- Colours come from the Pipenzo tokens: see [design-tokens.md](design-tokens.md); new UI adds no colour literals.

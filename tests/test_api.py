@@ -355,7 +355,8 @@ class StaticTest(ApiTestCase):
 
     def test_allowlisted_files_when_present(self):
         expect = {"/": "text/html", "/index.html": "text/html",
-                  "/app.js": "application/javascript", "/styles.css": "text/css"}
+                  "/app.js": "application/javascript", "/styles.css": "text/css",
+                  "/tokens.css": "text/css"}
         for path, ctype in expect.items():
             name = server_mod.STATIC_FILES[path][0]
             if not os.path.isfile(os.path.join(server_mod.STATIC_DIR, name)):

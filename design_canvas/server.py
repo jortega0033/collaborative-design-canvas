@@ -26,6 +26,7 @@ STATIC_FILES = {
     "/index.html": _INDEX,
     "/app.js": ("app.js", "application/javascript; charset=utf-8"),
     "/styles.css": ("styles.css", "text/css; charset=utf-8"),
+    "/tokens.css": ("tokens.css", "text/css; charset=utf-8"),
 }
 
 SECURITY_HEADERS = (
