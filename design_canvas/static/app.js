@@ -379,10 +379,14 @@
     }
   }
 
+  function token(name) {
+    return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  }
+
   function draw() {
     ctx.save();
     ctx.setTransform(1, 0, 0, 1, 0, 0);
-    ctx.fillStyle = '#ffffff';
+    ctx.fillStyle = token('--on-ink');
     ctx.fillRect(0, 0, el.canvas.width, el.canvas.height);
     ctx.restore();
     state.layers.forEach(function (l) {
@@ -409,10 +413,10 @@
       ctx.save();
       ctx.lineWidth = 2;
       ctx.setLineDash([6, 4]);
-      ctx.strokeStyle = '#ffffff';
+      ctx.strokeStyle = token('--on-ink');
       ctx.strokeRect(s.x - 1, s.y - 1, s.w + 2, s.h + 2);
       ctx.lineDashOffset = 5;
-      ctx.strokeStyle = '#c2410c';
+      ctx.strokeStyle = token('--ink');
       ctx.strokeRect(s.x - 1, s.y - 1, s.w + 2, s.h + 2);
       ctx.restore();
     }
