@@ -143,7 +143,7 @@ How a ticket gets from the backlog to the owner. Each piece is described in its 
 - **Permission rules.** [`.claude/settings.json`](.claude/settings.json): documented commands are allowed, merges, force pushes, pushes to `main` and releases are denied, edits to CI, agent configuration and Loop files ask first.
 - **CI.** [`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs the suite and the hook self-test on Linux and Windows. It runs on the draft pull request, and the pull request is marked ready only when it is green.
 - **Pull request.** Use the [template](.github/pull_request_template.md). Add one line to [CHANGELOG.md](CHANGELOG.md) under Unreleased.
-- **UI and copy.** [docs/ui-quality.md](docs/ui-quality.md) holds the ten UI rules; UI tickets start with the `ui-ux-pro-max` skill and copy goes through `unslop` before the pull request.
+- **UI and copy.** [docs/ui-quality.md](docs/ui-quality.md) holds the ten UI rules; UI tickets start with the `ui-ux-pro-max` skill and copy goes through `unslop` before the pull request. Colours come from the Pipenzo tokens in `design_canvas/static/tokens.css` ([docs/design-tokens.md](docs/design-tokens.md)): new UI uses them and adds no colour literals.
 - **Owner only.** Merging and releasing ([docs/RELEASING.md](docs/RELEASING.md)). Decisions behind all of this: [docs/owner-decisions.md](docs/owner-decisions.md). Security reports: [SECURITY.md](SECURITY.md).
 
 ## Loop
