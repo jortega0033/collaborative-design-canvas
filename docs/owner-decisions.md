@@ -1,6 +1,6 @@
 # Owner decisions
 
-Decisions the owner made for this repository on 2026-11-22. Changing any entry needs the owner. An agent that finds a decision blocking a ticket stops and says so.
+Decisions the owner made for this repository on 2026-11-22 and 2026-11-23, or that were adopted under the owner's delegation where the entry says so. Changing any entry needs the owner. An agent that finds a decision blocking a ticket stops and says so.
 
 Entry 11 of the owner's list (Rust is verified in CI only) does not apply: this repository has no Rust. The numbering below keeps the owner's numbers.
 
