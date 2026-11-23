@@ -17,6 +17,7 @@ Entry 11 of the owner's list (Rust is verified in CI only) does not apply: this 
 | 9 | 2026-11-22 | Permission rules: documented commands are allowed; force pushes, pushes to the default branch, merges, releases and reads of secrets are denied; edits to CI, agent configuration and Loop files ask first. | `.claude/settings.json` (`permissions`) |
 | 10 | 2026-11-22 | Open decisions on tickets are settled with the ticket's stated default. Listed below. | Epic #1, "Decisions shared by all tickets", item 10 |
 | 12 | 2026-11-22 | The ten UI rules are binding. The `ui-ux-pro-max` and `unslop` skills are installed in the repository and used for UI work and for copy. | `docs/ui-quality.md`, `.claude/skills/ui-ux-pro-max/`, `.claude/skills/unslop/`, `.claude/skills/implement-ticket/SKILL.md` |
+| 13 | 2026-11-23 | Visual system: Pipenzo Flow look tokens (docs/design-tokens.md). SDLC kit version: jortega0033/sdlc-kit v1.0.0. | `design_canvas/static/tokens.css`, `design_canvas/static/styles.css`, `docs/design-tokens.md` |
 
 ## Entry 10: decisions settled by a stated default
 
