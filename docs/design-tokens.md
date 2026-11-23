@@ -21,7 +21,7 @@ Dark is the primary design. The light block in `:root` is the matching light the
 
 | Role | Tokens |
 |---|---|
-| Surfaces | `--bg` (page), `--surface` (panels), `--bg-raised` (inputs, buttons), `--bg-sunken` (wells, disabled, list backgrounds) |
+| Surfaces | `--bg` (page), `--surface` (panels), `--bg-raised` (inputs, buttons, layer list, so the sunken hover stays visible), `--bg-sunken` (wells, disabled) |
 | Text | `--fg`, `--muted`, `--faint` (captions, disabled) |
 | Lines | `--border`, `--hairline`, `--control-border` (input and button edges) |
 | Dark block | `--ink`, `--on-ink`, `--on-ink-muted`, `--ink-border` (page header; the canvas scene uses `--on-ink` as paper and `--ink` for the selection outline) |

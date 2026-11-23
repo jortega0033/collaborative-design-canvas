@@ -18,7 +18,7 @@ body {
   align-items: baseline;
   gap: 16px;
   padding: 10px 16px;
-  background: var(--fg);
+  background: var(--ink);
   color: var(--on-ink);
 }
 .app-header h1 { margin: 0; font-size: 1.25rem; letter-spacing: 0.02em; }
@@ -129,7 +129,7 @@ button.danger { color: var(--danger); border-color: var(--danger); }
 
 .project-list, .layer-list { list-style: none; margin: 0; padding: 0; }
 .project-list { max-height: 260px; overflow-y: auto; }
-.layer-list { max-height: 220px; overflow-y: auto; border: 1px solid var(--border); background: var(--bg-sunken); border-radius: 3px; min-height: 36px; }
+.layer-list { max-height: 220px; overflow-y: auto; border: 1px solid var(--border); background: var(--bg-raised); border-radius: 3px; min-height: 36px; }
 .project-list li + li, .layer-list li + li { margin-top: 4px; }
 .layer-list li + li { margin-top: 0; border-top: 1px solid var(--hairline); }
 .project-list button, .layer-list button { width: 100%; text-align: left; overflow-wrap: anywhere; }
