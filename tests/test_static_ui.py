@@ -88,7 +88,7 @@ class StaticUiTests(unittest.TestCase):
         cls.page.feed(cls.html)
 
     def test_files_exist(self):
-        for name in ("index.html", "app.js", "styles.css"):
+        for name in ("index.html", "app.js", "styles.css", "tokens.css"):
             self.assertTrue((STATIC / name).is_file(), name)
 
     def test_ids_unique(self):
@@ -149,7 +149,7 @@ class StaticUiTests(unittest.TestCase):
 
     def test_no_external_urls(self):
         pattern = re.compile(r"(https?:)?//[A-Za-z0-9]|url\(|@import|\bwss?:", re.I)
-        for name in ("index.html", "app.js", "styles.css"):
+        for name in ("index.html", "app.js", "styles.css", "tokens.css"):
             m = pattern.search(read(name))
             self.assertIsNone(m, "%s: %s" % (name, m and m.group(0)))
         for tag, a in self.page.elements:
