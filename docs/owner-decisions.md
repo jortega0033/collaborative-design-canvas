@@ -1,6 +1,6 @@
 # Owner decisions
 
-Decisions the owner made for this repository on 2026-11-22. Changing any entry needs the owner. An agent that finds a decision blocking a ticket stops and says so.
+Decisions the owner made for this repository on 2026-11-22 and 2026-11-23, or that were adopted under the owner's delegation where the entry says so. Changing any entry needs the owner. An agent that finds a decision blocking a ticket stops and says so.
 
 Entry 11 of the owner's list (Rust is verified in CI only) does not apply: this repository has no Rust. The numbering below keeps the owner's numbers.
 
@@ -18,6 +18,7 @@ Entry 11 of the owner's list (Rust is verified in CI only) does not apply: this 
 | 10 | 2026-11-22 | Open decisions on tickets are settled with the ticket's stated default. Listed below. | Epic #1, "Decisions shared by all tickets", item 10 |
 | 12 | 2026-11-22 | The ten UI rules are binding. The `ui-ux-pro-max` and `unslop` skills are installed in the repository and used for UI work and for copy. | `docs/ui-quality.md`, `.claude/skills/ui-ux-pro-max/`, `.claude/skills/unslop/`, `.claude/skills/implement-ticket/SKILL.md` |
 | 13 | 2026-11-23 | Visual system: Pipenzo Flow look tokens (docs/design-tokens.md). SDLC kit version: jortega0033/sdlc-kit v1.0.0. | `design_canvas/static/tokens.css`, `design_canvas/static/styles.css`, `docs/design-tokens.md` |
+| 14 | 2026-11-23 | Accent, selection and focus (`docs/design-tokens.md`, "Accent, selection and focus"). D1 Current selection: the yellow accent is used for the primary action, the current-step marker and the current selection (UI rule 8); source: decided by the owner on 2026-11-23. How (solid `--primary` fill with `--on-primary` text, a second sign that is not colour, the existing aria attribute; never a tint with a same-hue border, never a thick one-sided border): recommended by the orchestrator, adopted under the owner's delegation of the same day. D2 Focus ring: `--focus` is a focus indicator, exempt from the accent limit, including where it is yellow in dark; a ticket that says the focus style stays unchanged means the rule on main after the token pull request; recommended by the orchestrator, adopted under the owner's delegation of 2026-11-23. D3 Themes: contrast and no-colour-alone checks cover both the light and the dark block of `tokens.css`; recommended by the orchestrator, adopted under the owner's delegation of 2026-11-23. | `docs/design-tokens.md`; the page follows in ticket work |
 
 ## Entry 10: decisions settled by a stated default
 

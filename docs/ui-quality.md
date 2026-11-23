@@ -24,3 +24,4 @@ Binding for every change to `design_canvas/static/` and to user-facing copy. The
 - The Frontend Developer, Accessibility Auditor and Code Reviewer roles name this file in their checklists.
 - Existing screens that break a rule are listed in a ticket, not fixed as a side effect of another ticket.
 - Colours come from the Pipenzo tokens: see [design-tokens.md](design-tokens.md); new UI adds no colour literals.
+- Rule 8 is read with the "Accent, selection and focus" section of [design-tokens.md](design-tokens.md) and owner decision 14 in [owner-decisions.md](owner-decisions.md): the accent also marks the current step, and `--focus` is a focus indicator, exempt from the accent limit.
